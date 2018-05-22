@@ -1,5 +1,7 @@
 package ua.com.owu.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +15,13 @@ public class User {
 
     private String name;
 
+    @JsonIgnore
+    // коли буде формуватися json по юзеру, це поле не буде чіпатися
     @OneToMany(/*mappedBy = "user", */ cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-
     @JoinTable(name = "user_ref_car",
             joinColumns = @JoinColumn(name = "id_user"),
             inverseJoinColumns = @JoinColumn(name = "id_car")
     )
-
     // костиль, щоб виправити помилку із реферальною таблицею
     // ми створюємо самі зв'язки, а не jpa
     private List<Car> cars = new ArrayList<Car>();

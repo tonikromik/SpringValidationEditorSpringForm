@@ -31,6 +31,12 @@ public class MainController {
         return "join";
     }
 
+    @GetMapping("/rest")
+    public String rest() {
+        return "rest";
+    }
+
+
     @ModelAttribute("userModel")
     public User user() {
         return new User();
